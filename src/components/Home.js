@@ -2,13 +2,14 @@ import React from 'react';
 
 export class Home extends React.Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       age: props.age,
-      homeLink: 'Changed Link',
+      homeLink: props.initialLinkName,
     };
     this.onMakeOlder = this.onMakeOlder.bind(this);
     this.onChangeLink = this.onChangeLink.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
   }
 
   onMakeOlder() {
@@ -19,7 +20,12 @@ export class Home extends React.Component {
 
   onChangeLink() {
     this.props.changeLink(this.state.homeLink);
-    console.log(this.state.homeLink);
+  }
+
+  onHandleChange(event) {
+    this.setState({
+      homeLink: event.target.value,
+    });
   }
 
   render() {
@@ -38,6 +44,11 @@ export class Home extends React.Component {
           Greet
         </button>
         <hr />
+        <input
+          type='text'
+          value={this.state.homeLink}
+          onChange={event => this.onHandleChange(event)}
+        />
         <button onClick={this.onChangeLink} className='btn btn-primary'>
           Change Header Link
         </button>
