@@ -2,17 +2,24 @@ import React from 'react';
 
 export class Home extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       age: props.age,
+      homeLink: 'Changed Link',
     };
     this.onMakeOlder = this.onMakeOlder.bind(this);
+    this.onChangeLink = this.onChangeLink.bind(this);
   }
 
   onMakeOlder() {
     this.setState({
       age: this.state.age + 3,
     });
+  }
+
+  onChangeLink() {
+    this.props.changeLink(this.state.homeLink);
+    console.log(this.state.homeLink);
   }
 
   render() {
@@ -29,6 +36,10 @@ export class Home extends React.Component {
         <hr />
         <button onClick={this.props.greet} className='btn btn-primary'>
           Greet
+        </button>
+        <hr />
+        <button onClick={this.onChangeLink} className='btn btn-primary'>
+          Change Header Link
         </button>
       </div>
     );
